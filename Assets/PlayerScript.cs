@@ -8,9 +8,9 @@ public class PlayerScript : MonoBehaviour
     Rigidbody rb;               
     public float Speed=90.0f;
     public float Grabity=9.0f;
-    public float jumpPower=10.0f;
-    bool jumpNow;
-    float x,y,z;
+    public float jumpPower=100.0f;
+    bool jumpFlag=true;
+    float x,z;
 
     // Start is called before the first frame update
     void Start()
@@ -19,63 +19,69 @@ public class PlayerScript : MonoBehaviour
        rb=GetComponent<Rigidbody>();
     }
 
+
+    void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.tag=="Stage")
+        {
+            Debug.Log("Stage");
+            jumpFlag=true;
+        }
+        
+    }
     // Update is called once per frame
     void Update()
     {
         MoveControll();
-         rb.velocity=moving;
-       
+        JumpControll();
+        rb.velocity=moving;
+        
     }
 
     void FixedUpdate()
     {
          MoveDir();
-         JumpGrabity();
     }
 
     void MoveControll()
     {
-       x=Input.GetAxisRaw("Horizontal");
-       z=Input.GetAxisRaw("Vertical");
-       moving=new Vector3(x*Time.deltaTime,0,z*Time.deltaTime);
+       x=Input.GetAxisRaw("Horizontal")*Speed;
+       z=Input.GetAxisRaw("Vertical")*Speed; 
+       moving=new Vector3(x,0,z)*Time.deltaTime;
        moving.Normalize();
        moving=moving*Speed;
     }
 
     public void MoveDir()
     {
-            if(Mathf.Abs(moving.x)>0.001f)
-            {
-            Quaternion rotX = Quaternion.AngleAxis(moving.x,Vector3.up);
-            rotX = Quaternion.Slerp(rb.transform.rotation, rotX, 0.1f);
-            this.transform.rotation = rotX;
-            }
-            else if(Mathf.Abs(moving.z)>0.001f)    
-            {
-            Quaternion rotZ = Quaternion.AngleAxis(moving.z-90,Vector3.up);
-            rotZ = Quaternion.Slerp(rb.transform.rotation, rotZ, 0.2f);
-            this.transform.rotation = rotZ;
-            }
-    }
-
-    void JumpControll(Collision other)
-    {
-        if(other.gameObject.CompareTag("Stage"))
+        if(Mathf.Abs(moving.x)>0.1f)
         {
-            jumpNow=false;
+        Quaternion rotX = Quaternion.AngleAxis(moving.x,Vector3.up);
+        rotX = Quaternion.Slerp(rb.transform.rotation, rotX, 0.1f);
+        this.transform.rotation = rotX;
         }
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        else if(Mathf.Abs(moving.z)>0.1f)    
         {
-		    rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
-		    jumpNow = true;
+        Quaternion rotZ = Quaternion.AngleAxis(moving.z-90,Vector3.up);
+        rotZ = Quaternion.Slerp(rb.transform.rotation, rotZ, 0.2f);
+        this.transform.rotation = rotZ;
         }
     }
 
-    void JumpGrabity()
+    void JumpControll()
     {
-        if(jumpNow)
+        if(jumpFlag)
         {
-            rb.AddForce(new Vector3(0,Grabity,0));
+           if(Input.GetKeyDown(KeyCode.Space))
+            {
+                if(jumpFlag)
+                {
+                    Debug.Log("jump");
+                    Vector3 force=new Vector3(0.0f,jumpPower,0.0f);
+                    rb.AddForce(force,ForceMode.Impulse);
+                    jumpFlag=false;
+                }
+            }
         }
     }
 }
