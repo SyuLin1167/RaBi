@@ -74,13 +74,11 @@ public class PlayerScript : MonoBehaviour
         {
            if(Input.GetKeyDown(KeyCode.Space))
             {
-                if(jumpFlag)
-                {
                     Debug.Log("jump");
                     Vector3 force=new Vector3(0.0f,jumpPower,0.0f);
                     rb.AddForce(force,ForceMode.Impulse);
                     jumpFlag=false;
-                }
+
             }
         }
     }
