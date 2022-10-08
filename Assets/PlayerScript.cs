@@ -8,7 +8,7 @@ public class PlayerScript : MonoBehaviour
     Rigidbody rb;               
     public float Speed=90.0f;
     public float Grabity=9.0f;
-    public float jumpPower=100.0f;
+    public float jumpPower=200.0f;
     bool jumpFlag=true;
     float x,z;
 
@@ -34,7 +34,7 @@ public class PlayerScript : MonoBehaviour
     {
         MoveControll();
         JumpControll();
-        rb.velocity=moving;
+       // rb.velocity=moving;
         
     }
 
@@ -45,24 +45,22 @@ public class PlayerScript : MonoBehaviour
 
     void MoveControll()
     {
-       x=Input.GetAxisRaw("Horizontal")*Speed;
-       z=Input.GetAxisRaw("Vertical")*Speed; 
-       moving=new Vector3(x,0,z)*Time.deltaTime;
-       moving.Normalize();
-       moving=moving*Speed;
+      x=Input.GetAxisRaw("Horizontal")*Speed;
+      z=Input.GetAxisRaw("Vertical")*Speed; 
+      rb.AddForce(x,0,z);
     }
 
     public void MoveDir()
     {
-        if(Mathf.Abs(moving.x)>0.1f)
+        if(Mathf.Abs(x)>0.1f)                                            //左右キーが入力されたら
         {
-        Quaternion rotX = Quaternion.AngleAxis(moving.x,Vector3.up);
-        rotX = Quaternion.Slerp(rb.transform.rotation, rotX, 0.1f);
-        this.transform.rotation = rotX;
+        Quaternion rotX = Quaternion.AngleAxis(x+90,Vector3.up);            //最大何度まで回転するか設定
+        rotX = Quaternion.Slerp(rb.transform.rotation, rotX, 0.1f);             //徐々に回転する
+        this.transform.rotation = rotX;                                         //取得した方向を向く
         }
-        else if(Mathf.Abs(moving.z)>0.1f)    
+        else if(Mathf.Abs(z)>0.1f)    
         {
-        Quaternion rotZ = Quaternion.AngleAxis(moving.z-90,Vector3.up);
+        Quaternion rotZ = Quaternion.AngleAxis(z,Vector3.up);
         rotZ = Quaternion.Slerp(rb.transform.rotation, rotZ, 0.2f);
         this.transform.rotation = rotZ;
         }
@@ -75,9 +73,9 @@ public class PlayerScript : MonoBehaviour
            if(Input.GetKeyDown(KeyCode.Space))
             {
                     Debug.Log("jump");
-                    Vector3 force=new Vector3(0.0f,jumpPower,0.0f);
-                    rb.AddForce(force,ForceMode.Impulse);
-                    jumpFlag=false;
+                    Vector3 force=new Vector3(0.0f,jumpPower,0.0f);             //ジャンプ力を設定
+                    rb.AddForce(force,ForceMode.Impulse);                       //力を加える
+                    jumpFlag=false;                                             //フラグを消す
 
             }
         }

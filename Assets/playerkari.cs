@@ -4,27 +4,48 @@ using UnityEngine;
 
 public class playerkari : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed=10.0f;         //移動速度
-    [SerializeField] private float jumpPower=10.0f;         //ジャンプ力
-
-    private CharacterController _characterController;       //CharacterControllerのキャッシュ
-    private Transform _transform;                           //Transformのキャッシュ
-    private Vector3 _moveVelocity;                          //キャラの移動速度情報
-
-    private void Start()
+    private Rigidbody rb; //リジッドボディを取得するための変数
+    public float upForce = 200f; //上方向にかける力
+    private bool isGround; //着地しているかどうかの判定
+ 
+ 
+ void Start()
     {
-        _characterController=GetComponent<CharacterController>();   //CharacterController使用宣言
-        _transform=transform;
+        rb = GetComponent<Rigidbody>(); //リジッドボディを取得
     }
-
-    
-    private void Update()
+    void Update()
     {
-        //入力による移動処理//
-        _moveVelocity.x=Input.GetAxis("Horizontal")*moveSpeed;
-        _moveVelocity.z=Input.GetAxis("Vertical")*moveSpeed;
-
-        //入力方向に向く//
-        _transform.LookAt(_transform.position+new Vector3(_moveVelocity.x,0,_moveVelocity.z));
+        if(Input.GetKey("up"))
+        {
+            transform.position += transform.forward * 0.03f;
+            
+        }
+ 
+        if(Input.GetKey("right"))
+        {
+            transform.Rotate(0,1,0);
+        }
+ 
+        if(Input.GetKey("left"))
+        {
+            transform.Rotate(0,-1,0);
+        }
+ 
+        if (isGround == true)//着地しているとき
+        {
+            if(Input.GetKeyDown("space"))
+            {
+                isGround = false;//  isGroundをfalseにする
+                rb.AddForce(new Vector3(0, upForce, 0)); //上に向かって力を加える
+            }
+        }
+    }
+    
+    void OnCollisionEnter(Collision other) //地面に触れた時の処理
+    {
+        if (other.gameObject.tag == "Stage") //Groundタグのオブジェクトに触れたとき
+        {
+            isGround = true; //isGroundをtrueにする
+        }
     }
 }
