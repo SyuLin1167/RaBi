@@ -58,7 +58,7 @@ public class PlayerScript : MonoBehaviour
         rotX = Quaternion.Slerp(rb.transform.rotation, rotX, 0.1f);             //徐々に回転する
         this.transform.rotation = rotX;                                         //取得した方向を向く
         }
-        else if(Mathf.Abs(z)>0.1f)    
+        if(Mathf.Abs(z)>0.1f)    
         {
         Quaternion rotZ = Quaternion.AngleAxis(z,Vector3.up);
         rotZ = Quaternion.Slerp(rb.transform.rotation, rotZ, 0.2f);
