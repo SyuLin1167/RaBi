@@ -8,6 +8,8 @@ public class CameraScript :  MonoBehaviour
     [SerializeField] private GameObject playerCamera;           //プレイヤーカメラ格納用
     [SerializeField] private GameObject player;
     private Vector3 Distance;
+    private Vector3 mCameraPosition;
+
 
     void Start()
     {
