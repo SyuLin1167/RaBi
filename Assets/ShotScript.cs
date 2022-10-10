@@ -28,11 +28,12 @@ public class ShotScript : MonoBehaviour
             GameObject shots = Instantiate(shot, shotPosition, player.transform.rotation);  //弾を複製
             _rb = shots.GetComponent<Rigidbody>();                                          //リジッドボディ取得
             
+            shot.transform.rotation=player.transform.rotation;
             _rb.velocity=transform.forward*Speed;                                           //弾を移動させる
 
             Count=0;                                                                        //タイマーを0にする
         }
-        Destroy(gameObject,3.0f);
+        Destroy(shot,3.0f);
         
         
     }
