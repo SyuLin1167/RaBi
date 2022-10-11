@@ -305,7 +305,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381040414}
   serializedVersion: 2
-  m_Mass: 0.1
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 5
   m_UseGravity: 0
@@ -583,7 +583,7 @@ GameObject:
   - component: {fileID: 832911549}
   m_Layer: 0
   m_Name: Shot
-  m_TagString: Shot
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -621,6 +621,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 3, z: 2}
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &915966562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915966559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4353adedd7ca2944ba6267a6a01dd13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &915966563
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 915966559}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -746,7 +774,7 @@ CapsuleCollider:
   m_Radius: 15
   m_Height: 35
   m_Direction: 1
-  m_Center: {x: 0, y: 18, z: 0}
+  m_Center: {x: 0, y: 17.5, z: 0}
 --- !u!4 &1695167505
 Transform:
   m_ObjectHideFlags: 0
@@ -770,7 +798,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695167503}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.5
   m_Drag: 0.5
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -791,7 +819,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 90
-  jumpPower: 200
+  jumpPower: 100
   x: 0
   z: 0
 --- !u!1 &1901300941
@@ -810,7 +838,7 @@ GameObject:
   - component: {fileID: 1901300947}
   m_Layer: 0
   m_Name: playerShot
-  m_TagString: Untagged
+  m_TagString: Shot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -829,7 +857,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!65 &1901300943
 BoxCollider:
@@ -839,7 +867,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901300941}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -863,7 +891,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b7daa87c6b1e5cf4d977ab3ba5336d3f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -921,7 +949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shot: {fileID: 1901300941}
   player: {fileID: 1695167503}
-  Speed: 50
+  Speed: 100
 --- !u!1 &2068720917
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,27 +8,27 @@ public class ShotScript : MonoBehaviour
     [SerializeField] private GameObject shot;  
     [SerializeField] private GameObject player;
      private float Count;
-    [SerializeField] private float Speed=50.0f;
+    [SerializeField] private float Speed=100.0f;
     private Vector3 shotPosition;
     
     void Start()
     {
        
-        shotPosition=player.transform.position+new Vector3(0,20,0);
+        
     }
  
     void Update()
     {
         
         Count+=Time.deltaTime;                  //タイムを計測
-        if(Count>2)                             //二秒たったら
+        if(Count>2.9)                             //二秒たったら
         {
-            
+            shot.transform.position=player.transform.position+new Vector3(0,20,0);                       //位置をセット
+            shot.transform.rotation=player.transform.rotation;
  
-            GameObject shots = Instantiate(shot, shotPosition, player.transform.rotation);  //弾を複製
+            GameObject shots = Instantiate(shot, shot.transform.position, shot.transform.rotation);  //弾を複製
             _rb = shots.GetComponent<Rigidbody>();                                          //リジッドボディ取得
             
-            shot.transform.rotation=player.transform.rotation;
             _rb.velocity=transform.forward*Speed;                                           //弾を移動させる
 
             Count=0;                                                                        //タイマーを0にする
