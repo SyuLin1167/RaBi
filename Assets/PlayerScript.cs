@@ -39,7 +39,7 @@ public class PlayerScript : MonoBehaviour
         MoveDir();
     }
 
-    void MoveControll()
+    public void MoveControll()
     {
         x=Input.GetAxisRaw("Horizontal")*playerSpeed;                    //左右キーが押されたときの値をX座標に入れる    
         z=Input.GetAxisRaw("Vertical")*playerSpeed;                      //上下キーが押されたときの値をY座標に入れる
@@ -62,7 +62,7 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    void JumpControll()
+    public void JumpControll()
     {
         if(jumpFlag)                                                    //ジャンプフラグがたっていたら
         {
