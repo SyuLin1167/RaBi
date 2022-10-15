@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
     private Rigidbody _rb;
-    private Renderer _rd;
-    //[SerializeField] private GameObject target;
-    public Transform target;
+    private NavMeshAgent _nma;
+    [SerializeField] private GameObject target;
 
     bool Damage=false;
     private float countTimer;
@@ -15,7 +15,7 @@ public class EnemyScript : MonoBehaviour
 
         void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag=="Shot")                               //プレイヤー弾が当たったら
+        if(other.gameObject.tag=="PlayerShot")                               //プレイヤー弾が当たったら
         {
             Debug.Log("Hit");                                         //ログを出す
            Damage=true;
@@ -26,33 +26,29 @@ public class EnemyScript : MonoBehaviour
 
     void Start()
     {
+       _nma=GetComponent<NavMeshAgent>();
        
     }
 
     
     void Update()
     {
+        MoveConotroll();
         DamageControll();
-        targetPos=target.position;
-        targetPos.y=transform.position.y;
-        transform.LookAt(target);
+       
+       
     }
 
     public void MoveConotroll()
     {
-        //target.transform.position;
+        _nma.destination=target.transform.position;
     } 
 
     public void DamageControll()
     {
         if(Damage)
         {
-            countTimer+=Time.deltaTime;
-            if(countTimer>3)
-                {
-                    countTimer=0;
-                    Damage=false;
-                }
+            
         }
     }
 }
