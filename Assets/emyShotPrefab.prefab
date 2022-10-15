@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930417082545989807}
-  m_LocalRotation: {x: -0, y: -0.99225086, z: -0, w: -0.124251015}
+  m_LocalRotation: {x: -0, y: 0.99981654, z: -0, w: 0.01915581}
   m_LocalPosition: {x: -20, y: 530, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 5}
   m_Children: []
@@ -92,7 +92,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930417082545989807}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -110,7 +110,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shot: {fileID: 930417082545989807}
-  owner: {fileID: 8380139407840081453, guid: f371e9ecfc269994191f8ec637170586, type: 3}
   Speed: 200
 --- !u!54 &4147759322899527312
 Rigidbody:

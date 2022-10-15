@@ -1,20 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
     private Rigidbody _rb;                                              //リジッドボディ
+    [SerializeField] private Slider _sl;                                                 //スライダー
     
     [SerializeField] private float playerSpeed=90.0f;                   //移動速度
     [SerializeField] private float jumpPower=200.0f;                    //ジャンプ力
-    bool jumpFlag=true;                                                 //ジャンプフラグ
+
+    bool jumpFlag=false;                                                 //ジャンプフラグ
+    bool damageFlag=false;
    
     [SerializeField] private float x,z;                                 //座標
+    [SerializeField] private float maxHp=100.0f;                        //Hp最大値
+    [SerializeField] private float nowHp=100.0f;                               //現在のHp
 
     void Start()
     {
        _rb=GetComponent<Rigidbody>();                                    //リジッドボディ取得
+       _sl.maxValue=maxHp;
+       _sl.value=nowHp;
+       
     }
 
 
@@ -25,12 +34,18 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("Stage");                                         //ログを出す
             jumpFlag=true;                                              //ジャンプフラグを立てる
         }   
+        if(other.gameObject.tag=="EnemyShot")                           //攻撃が当たったら
+        {
+            Debug.Log("Damage");                                        //ログを出す
+            damageFlag=true;                                            //ダメージフラグを立てる
+        }   
     }
    
     void Update()
     {
         MoveControll();
         JumpControll();
+        HpControll();
 
     }
 
@@ -48,13 +63,13 @@ public class PlayerScript : MonoBehaviour
 
     public void MoveDir()
     {
-        if(Mathf.Abs(x)>0.1f)                                           //左右キーが入力されたら
+        if(Mathf.Abs(x)>0.1f)                                            //左右キーが入力されたら
         {
-        Quaternion rotX = Quaternion.AngleAxis(x,Vector3.up);        //最大何度まで回転するか設定
+        Quaternion rotX = Quaternion.AngleAxis(x,Vector3.up);            //最大何度まで回転するか設定
         rotX = Quaternion.Slerp(_rb.transform.rotation, rotX, 0.1f);     //徐々に回転する
-        this.transform.rotation = rotX;                                 //取得した方向を向く
+        this.transform.rotation = rotX;                                  //取得した方向を向く
         }
-        if(Mathf.Abs(z)>0.1f)                                           //上下キーも同じように処理
+        if(Mathf.Abs(z)>0.1f)                                            //上下キーも同じように処理
         {
         Quaternion rotZ = Quaternion.AngleAxis(z-90,Vector3.up);
         rotZ = Quaternion.Slerp(_rb.transform.rotation, rotZ, 0.2f);
@@ -64,16 +79,28 @@ public class PlayerScript : MonoBehaviour
 
     public void JumpControll()
     {
-        if(jumpFlag)                                                    //ジャンプフラグがたっていたら
-        {
+        if(jumpFlag)                                                     //ジャンプフラグがたっていたら
+        { 
            if(Input.GetKeyDown(KeyCode.Space))                           //スペースキーを押すと
             {
                     Debug.Log("jump");                                   //ログを出す
                     Vector3 force=new Vector3(0.0f,jumpPower,0.0f);      //ジャンプ力を設定
-                    _rb.AddForce(force,ForceMode.Impulse);                //力を加える
+                    _rb.AddForce(force,ForceMode.Impulse);               //力を加える
                     jumpFlag=false;                                      //フラグを消す
 
             }
         }
+    }
+
+    public void HpControll()
+    {
+       if(damageFlag)
+       {
+           while(_sl.value<50)
+           {
+                _sl.value-=1.0f;
+           }
+           damageFlag=false;
+       }
     }
 }
