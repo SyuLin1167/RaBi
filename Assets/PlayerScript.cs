@@ -6,21 +6,27 @@ using UnityEngine.UI;
 public class PlayerScript : MonoBehaviour
 {
     private Rigidbody _rb;                                              //リジッドボディ
-    [SerializeField] private Slider _sl;                                                 //スライダー
+    [SerializeField] private Slider _sl;                                //スライダー
     
     [SerializeField] private float playerSpeed=90.0f;                   //移動速度
     [SerializeField] private float jumpPower=200.0f;                    //ジャンプ力
 
-    bool jumpFlag=false;                                                 //ジャンプフラグ
+    bool jumpFlag=false;                                                //ジャンプフラグ
     bool damageFlag=false;
    
-    [SerializeField] private float x,z;                                 //座標
+    private float x,z;                                                  //座標
     [SerializeField] private float maxHp=100.0f;                        //Hp最大値
-    [SerializeField] private float nowHp=100.0f;                               //現在のHp
+    [SerializeField] private float nowHp=100.0f;                        //現在のHp
+     int damageValue;
+    private float damageCounter;
 
     void Start()
     {
        _rb=GetComponent<Rigidbody>();                                    //リジッドボディ取得
+
+        HpManager plyHpManager=new HpManager();
+
+        damageValue=plyHpManager.Damage;
        _sl.maxValue=maxHp;
        _sl.value=nowHp;
        
@@ -43,6 +49,7 @@ public class PlayerScript : MonoBehaviour
    
     void Update()
     {
+        //関数呼び出し//
         MoveControll();
         JumpControll();
         HpControll();
@@ -94,13 +101,19 @@ public class PlayerScript : MonoBehaviour
 
     public void HpControll()
     {
-       if(damageFlag)
-       {
-           while(_sl.value<50)
-           {
-                _sl.value-=1.0f;
-           }
-           damageFlag=false;
+      if(damageFlag)
+       {  
+            if(damageCounter<damageValue)
+            {
+                damageCounter+=0.1f;
+                _sl.value-=0.1f;
+                Debug.Log(_sl.value);
+            }
+            else
+            {
+                damageCounter=0;
+                damageFlag=false;
+            }
        }
     }
 }
