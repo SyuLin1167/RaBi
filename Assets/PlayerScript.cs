@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerScript : MonoBehaviour
 {
     private Rigidbody _rb;                                              //リジッドボディ
-    [SerializeField] private Slider _sl;                                //スライダー
+    [SerializeField] private Slider _plysl;                                //スライダー
     
     [SerializeField] private float playerSpeed=90.0f;                   //移動速度
     [SerializeField] private float jumpPower=200.0f;                    //ジャンプ力
@@ -27,8 +27,8 @@ public class PlayerScript : MonoBehaviour
         HpManager plyHpManager=new HpManager();
 
         damageValue=plyHpManager.Damage;
-       _sl.maxValue=maxHp;
-       _sl.value=nowHp;
+       _plysl.maxValue=maxHp;
+       _plysl.value=nowHp;
        
     }
 
@@ -106,8 +106,8 @@ public class PlayerScript : MonoBehaviour
             if(damageCounter<damageValue)
             {
                 damageCounter+=0.1f;
-                _sl.value-=0.1f;
-                Debug.Log(_sl.value);
+                _plysl.value-=0.1f;
+                Debug.Log(_plysl.value);
             }
             else
             {
