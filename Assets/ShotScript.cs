@@ -9,14 +9,13 @@ public class ShotScript : MonoBehaviour
 
      private float countTimer;                              //タイマー
     [SerializeField] private float Speed=150.0f;            //弾の速度
-    [SerializeField] GameObject explosion;
+    [SerializeField] private GameObject explosion;
  
         
     void OnCollisionEnter(Collision collision)
     {
 
         Instantiate (explosion, transform.position, Quaternion.identity);
-        Destroy(explosion);
         Destroy(gameObject);
     }
 

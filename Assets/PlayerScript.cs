@@ -26,7 +26,7 @@ public class PlayerScript : MonoBehaviour
 
         HpManager plyHpManager=new HpManager();
 
-        damageValue=plyHpManager.Damage;
+        damageValue=plyHpManager.emyDamage;
        _plysl.maxValue=maxHp;
        _plysl.value=nowHp;
        
@@ -105,15 +105,14 @@ public class PlayerScript : MonoBehaviour
        {  
             if(damageCounter<damageValue)
             {
-                damageCounter+=0.1f;
-                _plysl.value-=0.1f;
-                Debug.Log(_plysl.value);
+                damageCounter+=0.5f;
+                _plysl.value-=0.5f;
             }
             else
             {
                 damageCounter=0;
                 damageFlag=false;
-            }
+            } 
        }
     }
 }

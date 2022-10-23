@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class HpManager
 {
-    private int dmg = 10;
-    public int Damage { get { return dmg; } }
+    private int plyDmg = 50;
+    public int plyDamage { get { return plyDmg; } }
 
+    private int emyDmg=10;
+    public int emyDamage{get{return emyDmg;}}
     // Start is called before the first frame update
     void Start()
     {

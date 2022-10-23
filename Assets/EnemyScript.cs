@@ -32,12 +32,13 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
        _nma=GetComponent<NavMeshAgent>();
-        HpManager plyHpManager=new HpManager();
+        HpManager emyHpManager=new HpManager();
 
-        damageValue=plyHpManager.Damage;
+        damageValue=emyHpManager.plyDamage;
        _emysl.maxValue=maxHp;
        _emysl.value=nowHp;
        
+
     }
 
     
@@ -61,8 +62,8 @@ public class EnemyScript : MonoBehaviour
         {
               if(damageCounter<damageValue)
             {
-                damageCounter+=0.1f;
-                _emysl.value-=0.1f;
+                damageCounter+=0.5f;
+                _emysl.value-=0.5f;
                 Debug.Log(_emysl.value);
             }
             else
@@ -70,6 +71,11 @@ public class EnemyScript : MonoBehaviour
                 damageCounter=0;
                 damageFlag=false;
             }
+        }
+        if( _emysl.value<=0)
+        {
+            Destroy(gameObject);
+            _emysl.gameObject.SetActive(false);
         }
     }
 }
