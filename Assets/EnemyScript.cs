@@ -16,8 +16,6 @@ public class EnemyScript : MonoBehaviour
     private float damageCounter;
 
     bool damageFlag=false;
-    private float countTimer;
-
         void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag=="PlayerShot")                               //プレイヤー弾が当たったら
