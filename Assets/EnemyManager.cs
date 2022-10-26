@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using UnityEngine.AI;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]private GameObject enemyprefab;                 //エネミープレハブ
     private float x,z;
 
+    // Start is called before the first frame update
     void Start()
     {
          for(int i=0;i<3;i++)                                       //for文で敵を三体出す
@@ -18,6 +20,7 @@ public class EnemyManager : MonoBehaviour
             Vector3 emyPos=new Vector3(x,enemyprefab.transform.position.y,z);                      //vectorに代入
             Instantiate(enemyprefab,emyPos,Quaternion.identity);    //複製
         }
+        
     }
 
     // Update is called once per frame

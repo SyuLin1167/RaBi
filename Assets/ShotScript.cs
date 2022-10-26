@@ -15,8 +15,9 @@ public class ShotScript : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
 
-        Instantiate (explosion, transform.position, Quaternion.identity);
+        GameObject explosions= Instantiate (explosion, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        Destroy(explosions,3.0f);
     }
 
     void Start()

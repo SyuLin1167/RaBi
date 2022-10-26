@@ -114,5 +114,9 @@ public class PlayerScript : MonoBehaviour
                 damageFlag=false;
             } 
        }
+        if( _plysl.value<=0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
