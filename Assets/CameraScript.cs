@@ -9,7 +9,7 @@ public class CameraScript :  MonoBehaviour
     [SerializeField] private GameObject player;
     private Vector3 Distance;
     private Vector3 mCameraPosition;
-
+    private float countTimer=0;
 
     void Start()
     {
@@ -20,10 +20,11 @@ public class CameraScript :  MonoBehaviour
     void Update()
     {
         playerCamera.transform.position=player.transform.position+Distance;
-        if(Input.GetKeyDown(KeyCode.Return))                    //エンターキーが押されたら
+        countTimer+=Time.deltaTime;                  //タイムを計測
+        if(countTimer>=2.0f)                             //二秒たったら
         {
-            mainCamera.SetActive(!mainCamera.activeSelf);       //メインカメラのアクティブ切り替え
-            playerCamera.SetActive(!playerCamera.activeSelf);   //プレイヤーカメラのアクティブ切り替え
+            mainCamera.SetActive(false);       //メインカメラのアクティブ切り替え
+            playerCamera.SetActive(true);   //プレイヤーカメラのアクティブ切り替え
         }
 
     }

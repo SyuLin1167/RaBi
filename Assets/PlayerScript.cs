@@ -7,9 +7,10 @@ public class PlayerScript : MonoBehaviour
 {
     private Rigidbody _rb;                                              //リジッドボディ
     [SerializeField] private Slider _plysl;                                //スライダー
-    
+    [SerializeField] private GameObject playerCamera;
     [SerializeField] private float playerSpeed=90.0f;                   //移動速度
     [SerializeField] private float jumpPower=200.0f;                    //ジャンプ力
+    [SerializeField] private GameObject cambus;
 
     bool jumpFlag=false;                                                //ジャンプフラグ
     bool damageFlag=false;
@@ -30,6 +31,7 @@ public class PlayerScript : MonoBehaviour
        _plysl.maxValue=maxHp;
        _plysl.value=nowHp;
        
+        cambus.SetActive(false);
     }
 
 
@@ -40,11 +42,12 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("Stage");                                         //ログを出す
             jumpFlag=true;                                              //ジャンプフラグを立てる
         }   
-        if(other.gameObject.tag=="EnemyShot")                           //攻撃が当たったら
+        if(other.gameObject.tag=="EnemyShot")                              //プレイヤー弾が当たったら
         {
-            Debug.Log("Damage");                                        //ログを出す
-            damageFlag=true;                                            //ダメージフラグを立てる
-        }   
+             GetComponent<AudioSource>().Play();
+            Debug.Log("Hit");                                         //ログを出す
+            damageFlag=true;
+        }
     }
    
     void Update()
@@ -101,6 +104,7 @@ public class PlayerScript : MonoBehaviour
 
     public void HpControll()
     {
+        _plysl.transform.rotation=playerCamera.transform.rotation;
       if(damageFlag)
        {  
             if(damageCounter<damageValue)
@@ -117,6 +121,8 @@ public class PlayerScript : MonoBehaviour
         if( _plysl.value<=0)
         {
             gameObject.SetActive(false);
+            _plysl.gameObject.SetActive(false);
+            cambus.SetActive(true);
         }
     }
 }

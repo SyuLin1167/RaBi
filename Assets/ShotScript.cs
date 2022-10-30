@@ -6,44 +6,45 @@ public class ShotScript : MonoBehaviour
 {
     private Rigidbody _rb;                                  //リジッドボディ
     [SerializeField] private GameObject shot;               //shotオブジェクト
+    Vector3 nowPos;
 
-     private float countTimer;                              //タイマー
-    [SerializeField] private float Speed=150.0f;            //弾の速度
-    [SerializeField] private GameObject explosion;
- 
-        
-    void OnCollisionEnter(Collision collision)
-    {
-
-        GameObject explosions= Instantiate (explosion, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-        Destroy(explosions,3.0f);
-    }
+    private float countTimer;                              //タイマー
+    [SerializeField] private float shotTimer=2.5f;
+    private float Speed=200.0f;            //弾の速度
+    [SerializeField] private float Spacing=0.0f;
+    private   GameObject shots = null;
+    
 
     void Start()
     {
        
-        
     }
  
     void Update()
     {
-        GameObject shots = null;
+        
         countTimer+=Time.deltaTime;                  //タイムを計測
-        if(countTimer>2.5f)                             //二秒たったら
+        if(countTimer>shotTimer)                             //二秒たったら
         {
+            if(shotTimer>0.1f)
+            {
+                shotTimer-= Spacing;
+            }
             shots = Instantiate(shot, transform.position, transform.rotation);  //弾を複製
             _rb = shots.GetComponent<Rigidbody>();                                          //リジッドボディ取得
-            
+            GetComponent<AudioSource>().Play();
             _rb.AddForce(transform.forward*Speed,ForceMode.Impulse);                                           //弾を移動させる
-
             countTimer=0;                                                                        //タイマーを0にする
+            Destroy(shots,2.0f);
         }
-        Destroy(shots,2.0f);
-        
-        
-    }
 
+        nowPos=new Vector3(0,this.transform.position.y,0);
+        if(nowPos.y>550)
+        {
+            countTimer=0;
+            shotTimer=1;
+        }
+    }
     
 }
 
