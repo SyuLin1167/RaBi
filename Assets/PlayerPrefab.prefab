@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 542264129123952494}
   - component: {fileID: 542264129123952495}
   - component: {fileID: 542264129123952493}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlayerPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 530, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3442739000442170}
   m_Father: {fileID: 0}
@@ -46,10 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c018f16295faed54e8accc301102011f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _plysl: {fileID: 0}
+  playerCamera: {fileID: 0}
   playerSpeed: 90
   jumpPower: 200
-  x: 0
-  z: 0
+  cambus: {fileID: 0}
+  maxHp: 100
+  nowHp: 100
 --- !u!54 &542264129123952495
 Rigidbody:
   m_ObjectHideFlags: 0

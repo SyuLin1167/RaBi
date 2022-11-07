@@ -8,9 +8,9 @@ public class ShotScript : MonoBehaviour
     [SerializeField] private GameObject shot;               //shotオブジェクト
     Vector3 nowPos;
 
-    private float countTimer;                              //タイマー
+    private float countTimer;                               //タイマー
     [SerializeField] private float shotTimer=2.5f;
-    private float Speed=200.0f;            //弾の速度
+    [SerializeField] private float Speed=200.0f;            //弾の速度
     [SerializeField] private float Spacing=0.0f;
     private   GameObject shots = null;
     
@@ -35,7 +35,6 @@ public class ShotScript : MonoBehaviour
             GetComponent<AudioSource>().Play();
             _rb.AddForce(transform.forward*Speed,ForceMode.Impulse);                                           //弾を移動させる
             countTimer=0;                                                                        //タイマーを0にする
-            Destroy(shots,2.0f);
         }
 
         nowPos=new Vector3(0,this.transform.position.y,0);

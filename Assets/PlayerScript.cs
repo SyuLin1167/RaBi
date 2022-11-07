@@ -44,7 +44,8 @@ public class PlayerScript : MonoBehaviour
         }   
         if(other.gameObject.tag=="EnemyShot")                              //プレイヤー弾が当たったら
         {
-             GetComponent<AudioSource>().Play();
+            GetComponent<AudioSource>().Stop();
+            GetComponent<AudioSource>().Play();
             Debug.Log("Hit");                                         //ログを出す
             damageFlag=true;
         }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7530561686769192619}
   - component: {fileID: 7530561686769192620}
   - component: {fileID: 6373152065280481629}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyPrefab 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 7530561686514767444}
   - component: {fileID: 7530561686514767446}
   - component: {fileID: 7530561686514767447}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "\u5186\u9310.001"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 7530561686667138611}
   - component: {fileID: 7530561686667138610}
   - component: {fileID: 6373152064000916137}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: emyShotManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 7530561686963057535}
   - component: {fileID: 7530561686963057529}
   - component: {fileID: 7530561686963057534}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "\u5186\u67F1"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 7530561687255889217}
   - component: {fileID: 7530561687255889219}
   - component: {fileID: 7530561687255889216}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "\u5186\u9310"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -607,7 +607,7 @@ GameObject:
   - component: {fileID: 7530561687912475328}
   - component: {fileID: 7530561687912475330}
   - component: {fileID: 7530561687912475331}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "\u30C8\u30FC\u30E9\u30B9"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -688,7 +688,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7530561688157199553}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -727,7 +727,7 @@ GameObject:
   - component: {fileID: 7530561688198427488}
   - component: {fileID: 7530561688198427490}
   - component: {fileID: 7530561688198427491}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -810,7 +810,7 @@ GameObject:
   - component: {fileID: 7530561688390830614}
   - component: {fileID: 7530561688390830608}
   - component: {fileID: 7530561688390830609}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "\u5186\u67F1.001"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -997,6 +997,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: emyHpCamvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1249004328727556711, guid: 7a2d2a0089847074286773b9bf82a876, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702919329987961993, guid: 7a2d2a0089847074286773b9bf82a876, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7702919330118526993, guid: 7a2d2a0089847074286773b9bf82a876, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1004,6 +1012,18 @@ PrefabInstance:
     - target: {fileID: 7702919330118526993, guid: 7a2d2a0089847074286773b9bf82a876, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702919330118527006, guid: 7a2d2a0089847074286773b9bf82a876, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702919330629121279, guid: 7a2d2a0089847074286773b9bf82a876, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702919331073919883, guid: 7a2d2a0089847074286773b9bf82a876, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a2d2a0089847074286773b9bf82a876, type: 3}
