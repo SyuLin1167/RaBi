@@ -9,6 +9,7 @@ TagManager:
   - PlayerShot
   - EnemyShot
   - Shot
+  - Heal
   layers:
   - Default
   - TransparentFX

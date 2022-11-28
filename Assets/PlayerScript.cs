@@ -16,6 +16,7 @@ public class PlayerScript : MonoBehaviour
     bool damageFlag=false;
    
     private float x,z;                                                  //座標
+    private float time;
     [SerializeField] private float maxHp=100.0f;                        //Hp最大値
     [SerializeField] private float nowHp=100.0f;                        //現在のHp
      int damageValue;
@@ -44,13 +45,21 @@ public class PlayerScript : MonoBehaviour
         }   
         if(other.gameObject.tag=="EnemyShot")                              //プレイヤー弾が当たったら
         {
-            GetComponent<AudioSource>().Stop();
-            GetComponent<AudioSource>().Play();
+             GetComponent<AudioSource>().Play();
             Debug.Log("Hit");                                         //ログを出す
             damageFlag=true;
         }
+ 
     }
    
+       void OnTriggerEnter(Collider other)
+    {
+       if(other.gameObject.tag=="Heal")                               //地面についていたら
+        {
+            _plysl.value+=20;
+        }  
+    }
+
     void Update()
     {
         //関数呼び出し//
@@ -67,22 +76,24 @@ public class PlayerScript : MonoBehaviour
 
     public void MoveControll()
     {
-        x=Input.GetAxisRaw("Horizontal")*playerSpeed;                    //左右キーが押されたときの値をX座標に入れる    
-        z=Input.GetAxisRaw("Vertical")*playerSpeed;                      //上下キーが押されたときの値をY座標に入れる
-        _rb.AddForce(x,0,z);                                             //値を加える
+        time=Time.deltaTime*250.0f;
+        x=Input.GetAxisRaw("Horizontal");                    //左右キーが押されたときの値をX座標に入れる    
+        z=Input.GetAxisRaw("Vertical");                      //上下キーが押されたときの値をY座標に入れる
+        _rb.AddForce(x*playerSpeed*time,0,z*playerSpeed*time);                                             //値を加える
+        Debug.Log(Time.deltaTime);  
     }
 
     public void MoveDir()
     {
         if(Mathf.Abs(x)>0.1f)                                            //左右キーが入力されたら
         {
-        Quaternion rotX = Quaternion.AngleAxis(x,Vector3.up);            //最大何度まで回転するか設定
+        Quaternion rotX = Quaternion.AngleAxis(x*90,Vector3.up);            //最大何度まで回転するか設定
         rotX = Quaternion.Slerp(_rb.transform.rotation, rotX, 0.1f);     //徐々に回転する
         this.transform.rotation = rotX;                                  //取得した方向を向く
         }
         if(Mathf.Abs(z)>0.1f)                                            //上下キーも同じように処理
         {
-        Quaternion rotZ = Quaternion.AngleAxis(z-90,Vector3.up);
+        Quaternion rotZ = Quaternion.AngleAxis(z*90-90,Vector3.up);
         rotZ = Quaternion.Slerp(_rb.transform.rotation, rotZ, 0.2f);
         this.transform.rotation = rotZ;
         }

@@ -73,8 +73,8 @@ public class EnemyScript : MonoBehaviour
         
             if(nowHp<=0)
             {
-                Destroy(gameObject);
-                
+                //Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }
