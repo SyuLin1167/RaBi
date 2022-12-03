@@ -15,24 +15,29 @@ public class Camera : MonoBehaviour
     private Vector3 _moveControl = new Vector3(0.0f, 0.0f, 0.1f); //移動制御
 
     //---変数---//
-    private float _Timer=0;                                 //タイマー
+    private const float _MaxSpeed=65.0f;                    //最大速度
 
-//---コンストラクター---//
+/* コンストラクター */
     void Start()
     {
         plyCamera.SetActive(false);                         //プレイヤーカメラは非アクティブ化
-        _plyDistance=plyCamera.transform.position-Player.transform.position;    //プレイヤーとカメラの距離を求める
     }
 
+/* 更新処理 */
     void Update()
     {
-        plyCamera.transform.position = Player.transform.position + _plyDistance;    //プレイヤーと一定の距離にカメラを設置
-        if (_moveSpeed.z<0)                                 //速度が0になったら
+        MoveControll();
+    }
+
+/* 移動制御 */
+    void MoveControll()
+    {
+         if (_moveSpeed.z<0)                                //速度が0になったら
         {
             mainCamera.SetActive(false);                    //メインカメラは非アクティブ化
             plyCamera.SetActive(true);                      //プレイヤーカメラはアクティブ化
         }
-        else
+        else                                                //速度が0でなければ
         {
             _moveSpeed += _moveControl;                     //速度加速
             if(_moveSpeed.z>65.0f)                          //速度が最大になったら
